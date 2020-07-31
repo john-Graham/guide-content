@@ -5,10 +5,10 @@
 In short, it allows Wordpress users to display academic program information from within the https://guide.wisc.edu domain directly on their own website.
   
 <h3>How does it work?</h3>
-1.	Once installed and activated on your Wordpress site, the plugin reads the user-specified attributes from the [guide-content] shortcode (url and tab attributes)
-2.	Based on the url attribute value, the plugin loads the index.xml version of that guide.wisc.edu webpage
-3.	The plugin parses the XML content and extracts the contents of the chosen tab (at that point, the content is already pre-formatted html)
-4.	Finally, it prints the html contents on the Wordpress page in the location where the shortcode is placed
+<ol><li>Once installed and activated on your Wordpress site, the plugin reads the user-specified attributes from the [guide-content] shortcode (url and tab attributes)</li>
+<li>Based on the url attribute value, the plugin loads the index.xml version of that guide.wisc.edu webpage</li>
+<li>The plugin parses the XML content and extracts the contents of the chosen tab (at that point, the content is already pre-formatted html)</li>
+<li>Finally, it prints the html contents on the Wordpress page in the location where the shortcode is placed</li>
 
 <h3>How to Use in Wordpress</h3>
 <ol><li>(Required) Define the url attribute. The value should correspond to the url of the Guide page whose information you want displayed on the Wordpress page (e.g. url=” https://guide.wisc.edu/undergraduate/human-ecology/consumer-science/personal-finance-bs/")</li>
