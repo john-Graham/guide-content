@@ -1,5 +1,5 @@
 # guide-content
-<h2>Wordpress Plugin for UW-Madison Guide Content</h2>
+<h2>A Wordpress Plugin for UW-Madison Guide Content</h2>
 
 <h3>What does this plugin do?</h3>
 In short, it allows Wordpress users to display academic program information from within the https://guide.wisc.edu domain directly on their own website.
