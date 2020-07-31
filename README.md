@@ -11,13 +11,13 @@ In short, it allows Wordpress users to display academic program information from
 4.	Finally, it prints the html contents on the Wordpress page in the location where the shortcode is placed
 
 <h3>How to Use in Wordpress</h3><br>
-<ol><li>(Required) Define the url attribute. The value should correspond to the url of the Guide page whose information you want displayed on the Wordpress page (e.g. url=” https://guide.wisc.edu/undergraduate/human-ecology/consumer-science/personal-finance-bs/")
-<ul><li>The url value will work for all Undergraduate, Graduate, and Nondegree plan pages listed in Guide</li></ul>
-<ul><li>This will still work even if ‘index.html’ is appended to the end of the url value set by the user</li></ul></li>
-<ol><li>(Required) Define the tab attribute. The value should correspond to the specific tab on the right side of the chosen Guide page (url). This plugin is designed to display the contents of one tab per shortcode, but users can include as many shortcodes on a page as they need. (e.g.  tab ="How to Get in”)
-<ul><li>Neither case nor spacing matter (because humans) so tab=”HOW TO GET IN” will work the same as tab=”HoWtOgEtIn”</li></ul></li>
-<ol><li>(Optional) Define the geneds attribute: geneds=”n”
-<ul><li>This optional attribute, if set to value of “n”, will hide the General Education Requirements. This will only work on an undergraduate plan page and only for those shortcodes where tab=”requirements”, because that is the only place in Guide where General Education Requirements are displayed.</li></ul></li>
+<ol><li>(Required) Define the url attribute. The value should correspond to the url of the Guide page whose information you want displayed on the Wordpress page (e.g. url=” https://guide.wisc.edu/undergraduate/human-ecology/consumer-science/personal-finance-bs/")</li>
+<li>The url value will work for all Undergraduate, Graduate, and Nondegree plan pages listed in Guide</li>
+<li>This will still work even if ‘index.html’ is appended to the end of the url value set by the user</li>
+<li>(Required) Define the tab attribute. The value should correspond to the specific tab on the right side of the chosen Guide page (url). This plugin is designed to display the contents of one tab per shortcode, but users can include as many shortcodes on a page as they need. (e.g.  tab ="How to Get in”)</li>
+<li>Neither case nor spacing matter (because humans) so tab=”HOW TO GET IN” will work the same as tab=”HoWtOgEtIn”</li>
+  <ol><li>(Optional) Define the geneds attribute: geneds=”n”</li>
+<li>This optional attribute, if set to value of “n”, will hide the General Education Requirements. This will only work on an undergraduate plan page and only for those shortcodes where tab=”requirements”, because that is the only place in Guide where General Education Requirements are displayed.</li>
 
 Bonus side-note: If either the url or tab attribute values are invalid, nothing will be displayed on the page. 
 
