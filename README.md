@@ -18,7 +18,7 @@ In short, it allows Wordpress users to display academic program information from
 <ul><li>Neither case nor spacing matter (because humans) so tab=”HOW TO GET IN” will work the same as tab=”HoWtOgEtIn”</li></ul>
 <li>(Optional) Define the geneds attribute: geneds=”n”
 <ul><li>This optional attribute, if set to value of “n”, will hide the General Education Requirements. This will only work on an undergraduate plan page and only for those shortcodes where tab=”requirements”, because that is the only place in Guide where General Education Requirements are displayed.</li></ul>
-
+</ol>
 Bonus side-note: If either the url or tab attribute values are invalid, nothing will be displayed on the page. 
 
 <h3>TODO:</h3>
