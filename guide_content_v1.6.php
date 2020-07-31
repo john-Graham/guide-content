@@ -2,13 +2,13 @@
 /*
  * @wordpress-plugin
  * Plugin Name:  Guide Content
- * Plugin URI:   
- * Description:   Access Guide (guide.wisc.edu) page data via CourseLeaf API/XML. For use on UW-Madison academic program websites.
- * Version:   1.5         
+ * Plugin URI:    https://github.com/mack0331/guide-content
+ * Description:   Access Guide (guide.wisc.edu) content via CourseLeaf API/XML. For use on UW-Madison academic program websites.
+ * Version:   1.6
  * Author:   Eric MacKay (Inspired by the work of Nathan Fetter)
- * Author URI:        
- * Text Domain:       
- * Domain Path:      
+ * Author URI:    https://github.com/mack0331
+ * Text Domain:
+ * Domain Path:
  */
 
 //Disallow access to altering the PHP code from anywhere outside of Wordpress
@@ -39,6 +39,7 @@ function guide_content( $atts, $post ){
     $guide_tabs = array('text' => 'overview',
         'howtogetintext' => 'howtogetin', 
         'requirementstext' => 'requirements',
+	'threeyearplantext' => 'three-yearplan',
         'fouryearplantext' => 'four-yearplan',
         'advisingandcareerstext' => 'advisingandcareers',
         'peopletext' => 'people',
