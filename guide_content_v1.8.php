@@ -114,8 +114,8 @@ function guide_content( $atts, $post ){
 
     //Insert the Mortarboard Symbol (to indicate courses meeting Gen Ed req) where appropriate, but only if the "University General Education Requirements" is on the page
     if ( $selected_tab == 'requirementstext' && strpos($courseleaf_parsed, '* The mortarboard symbol') !== false ) {
-        $courseleaf_parsed = str_replace('* The mortarboard symbol appears','* The mortarboard symbol (<img src="'.$plugin_url.'img/mortarboard2.png" height="20" width="20" alt="Mortarboard Symbol">) appears',$courseleaf_parsed); 
-        $courseleaf_parsed = str_replace('<i class="fa fa-graduation-cap" aria-hidden="true"></i>','<img src="'.$plugin_url.'img/mortarboard2.png"  height="20" width="20" alt="Mortarboard Symbol">',$courseleaf_parsed); 
+        $courseleaf_parsed = str_replace('* The mortarboard symbol appears','* The mortarboard symbol (<img src="'.$plugin_url.'mortarboard2.png" height="20" width="20" alt="Mortarboard Symbol">) appears',$courseleaf_parsed); 
+        $courseleaf_parsed = str_replace('<i class="fa fa-graduation-cap" aria-hidden="true"></i>','<img src="'.$plugin_url.'mortarboard2.png"  height="20" width="20" alt="Mortarboard Symbol">',$courseleaf_parsed); 
     }
 
     //UDR ATTRIBUTE: Automatically hide the University Degree Requirements Section unless udr = 'y'
