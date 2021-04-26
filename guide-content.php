@@ -4,7 +4,7 @@
  * Plugin Name:  Guide Content
  * Plugin URI:    https://github.com/mack0331/guide-content
  * Description:   Access Guide (guide.wisc.edu) content via CourseLeaf API/XML. For use on UW-Madison academic program websites.
- * Version:   1.8.3
+ * Version:   1.8.4
  * Author:   Eric MacKay
  * Author URI:    https://github.com/mack0331
  * License: GPL2
@@ -87,6 +87,19 @@ function guide_content( $atts, $post ){
 
         //Push the tab (HTML) contents to the $courseleaf_parsed variable for further parsing below
             $courseleaf_parsed  = array_search($selected_tab, $content_array);
+
+        //ADJUST ATTRIBUTE: Complete any 'adjusts' specified via the 'adjust' attribute
+        foreach ( $adjust_array as $adjust_pair ) {
+            $adjust_pair_array = explode('-',$adjust_pair);
+            foreach ( $adjust_pair_array as $key=>$adjustment) { //for each adjust entry in the adjust attribute, make the requested substitutions
+                if ( isset($adjust_pair_array[$key]) ) {
+                    $courseleaf_parsed = str_replace('<'.$adjust_pair_array[0],'<'.$adjust_pair_array[1],$courseleaf_parsed);
+                    $courseleaf_parsed = str_replace('</'.$adjust_pair_array[0].'> ','</'.$adjust_pair_array[1].'> ',$courseleaf_parsed);
+                } else {
+                // end of array reached--no more adjusts to complete
+                }
+            }
+        }
 
         //BEFORE ATTRIBUTE: Get all of the content before, but not including, the specific H2 header
         if ( !empty($before) && empty($exact) ) {
@@ -177,19 +190,6 @@ function guide_content( $atts, $post ){
 
         //Replace code-bubbles with hyperlinks that search for the courses in Catalog
         $courseleaf_parsed = preg_replace('/<span class="code_bubble" data-code-bubble="(.*)">(.*)<\/span>/U', '<span><a href="'.$institution.'search/?P=$1">$2</a></span>', $courseleaf_parsed);
-
-        //ADJUST ATTRIBUTE: Complete any 'adjusts' specified via the 'adjust' attribute
-        foreach ( $adjust_array as $adjust_pair ) {
-            $adjust_pair_array = explode('-',$adjust_pair);
-            foreach ( $adjust_pair_array as $key=>$adjustment) { //for each adjust entry in the adjust attribute, make the requested substitutions
-                if ( isset($adjust_pair_array[$key]) ) {
-                    $courseleaf_parsed = str_replace('<'.$adjust_pair_array[0],'<'.$adjust_pair_array[1],$courseleaf_parsed);
-                    $courseleaf_parsed = str_replace('</'.$adjust_pair_array[0].'> ','</'.$adjust_pair_array[1].'> ',$courseleaf_parsed);
-                } else {
-                // end of array reached--no more adjusts to complete
-                }
-            }
-        }
         
         //Due to the variety of ways in which the "before" "after" and "exact" shortcodes may be placed within a single or multiple Wordpress Page Elements, there was a potential for a DIV to be left open or closed erroneously. 
         //This section checks each instance of the [guide_content] shortcode and makes sure that it is appropriately contained within a DIV so that it does not affect any other pgae content
