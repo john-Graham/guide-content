@@ -4,7 +4,7 @@
  * Plugin Name:  Guide Content
  * Plugin URI:    https://github.com/mack0331/guide-content
  * Description:   Access Guide (guide.wisc.edu) content via CourseLeaf API/XML. For use on UW-Madison academic program websites.
- * Version:   1.8.1
+ * Version:   1.8.3
  * Author:   Eric MacKay
  * Author URI:    https://github.com/mack0331
  * License: GPL2
@@ -48,7 +48,7 @@ function guide_content( $atts, $post ){
     $lookup_tab = strpos($url, '#');
 
     //If no tab specified, return the Overview content (#text node-value), else set the selected tab to the text found after the # in the "url" attribute value
-    if (empty($lookup_tab) == true) {
+    if ( empty($lookup_tab) !== false ) {
         $selected_tab = 'text';
     } else {
         $selected_tab = substr($url, $lookup_tab + 1);
@@ -62,8 +62,7 @@ function guide_content( $atts, $post ){
     
     //Grabs the XML from the page specified in the "url" shortcode attribute loads it into a DOMDocument to be parsed
     $xmlDoc = new DOMDocument();
-
-    if(filter_var($selected_plan, FILTER_VALIDATE_URL)) {
+    if ( @$xmlDoc->load($selected_plan) !== false ) {
         $xmlDoc->load($selected_plan);
         $x = $xmlDoc->documentElement;
 
@@ -201,15 +200,11 @@ function guide_content( $atts, $post ){
             $courseleaf_parsed = '<div>'.$courseleaf_parsed;
         }
 
-    
-
         //Print all of the results onto the page!
         return $courseleaf_parsed;
 
     } //End if no DOM document found
-    else {
-        "Invalid Guide URL Entered."
-    }
+
 } //End function
 
 ?>
