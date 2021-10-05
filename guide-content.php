@@ -4,7 +4,7 @@
  * Plugin Name:  Guide Content
  * Plugin URI:    https://github.com/mack0331/guide-content
  * Description:   Access Guide (guide.wisc.edu) content via CourseLeaf API/XML. For use on UW-Madison academic program websites.
- * Version:   1.9
+ * Version:   1.9 --Add caching--
  * Author:   Eric MacKay
  * Author URI:    https://github.com/mack0331
  * License: GPL2
@@ -28,6 +28,10 @@ function guide_content( $atts, $post ){
     $grad = trim($atts['grad']); //(optional)
     $adjust = trim($atts['adjust']); //(optional)
     $geneds = trim($atts['adjust']); //(optional) -- deprecated
+
+    //Concatenate options to identfy unique ID for building/checking the cache
+    $cache = $url.$after.$before.$exact.$udr.$grad.$adjust.$geneds;
+    $previous_cache_contents = get_transient($cache);
 
     //geneds was deprecated in 1.7, this line serves to approximate the behavior of what geneds="y" used to do
     if ( $geneds == 'y' ) {
@@ -58,10 +62,10 @@ function guide_content( $atts, $post ){
     $url = str_replace('#'.$selected_tab,'',$url);
 
     //Set the selected_plan as the xml version of the CAT page (public access to this XML is, effectively, the entirety of the CourseLeaf-provided API)
-    $selected_plan = $url.'index.xml';     
+    $selected_plan = $url.'index.xml';
     
-        //Checks whether this page + tab combination has been cached in the past 24 hours
-        if (($courseleaf_parsed = get_transient($selected_plan.$selected_tab)) === false ) {
+    //Checks whether this page has been cached in the past 24 hours, if not then fetch the content fresh; else use the cached content
+    if (empty($previous_cache_contents) === true) {
 
         //Grabs the XML from the page specified in the "url" shortcode attribute loads it into a DOMDocument to be parsed
         $xmlDoc = new DOMDocument();
@@ -202,24 +206,28 @@ function guide_content( $atts, $post ){
             else if ( substr_count($courseleaf_parsed, '<div') < substr_count($courseleaf_parsed,'</div>') ){
                 $courseleaf_parsed = '<div>'.$courseleaf_parsed;
             }
-            
-            //Cache the results and print all of the results onto the page!
-            set_transient( $selected_plan.$selected_tab, $courseleaf_parsed, 60*60*24 ); //Store results in 24-hour cache
-            $courseleaf_parsed = get_transient($selected_plan.$selected_tab);
 
-            //Print all of the results onto the page!
-            return $courseleaf_parsed;
+            //If any content was fetched, cache the results and print all of the results onto the page! 
+            if( !empty($courseleaf_parsed )){
+                set_transient($cache, $courseleaf_parsed, 60*60*24 ); //Store results in 24-hour cache
+
+                $courseleaf_parsed = get_transient($cache);
+
+                return $courseleaf_parsed;
+            } 
 
         } //End if no DOM document found
-    
-    }
+
+    } 
+    //If cache was found, get that cache and return contents
     else {
-            //Else if cache was found, get that cache and return contents
-            $courseleaf_parsed = get_transient($selected_plan.$selected_tab);
-            return $courseleaf_parsed;
-    
-    }
+        $courseleaf_parsed = get_transient($cache);
+
+        return $courseleaf_parsed;
+
         
+    }
+
 } //End function
 
 ?>
