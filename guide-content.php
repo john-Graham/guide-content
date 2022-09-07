@@ -4,7 +4,7 @@
  * Plugin Name:  Guide Content
  * Plugin URI:    https://github.com/mack0331/guide-content
  * Description:   Access Guide (guide.wisc.edu) content via CourseLeaf API/XML. For use on UW-Madison academic program websites.
- * Version:   1.9 --Add caching--
+ * Version:   2.0 --Merged branch with John Graham contributions--
  * Author:   Eric MacKay
  * Author URI:    https://github.com/mack0331
  * License: GPL2
